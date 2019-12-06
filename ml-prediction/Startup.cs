@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.ML;
+using ml_prediction.ml;
 
 namespace ml_prediction
 {
@@ -25,6 +27,7 @@ namespace ml_prediction
         {
             services.AddRazorPages();
             services.AddMvc(option => option.EnableEndpointRouting = false);
+            services.AddSingleton<PredictionEngine<PredictiveModel, Prediction>>(new ModelBuilder().Build());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
